@@ -17,6 +17,7 @@ const server = http.createServer((req, res) => {
             body += chunk;
         });
 
+        
         req.on("end", () => {
             try {
                 const newPost = JSON.parse(body);
