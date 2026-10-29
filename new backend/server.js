@@ -35,20 +35,26 @@ app.get("/posts/:id", (req, res) => {
 
     res.json(post);
 });
+
 app.put("/posts/:id", (req, res) => {
-    // Your code here
-
     const id = Number(req.params.id);
+    const post = posts.find(post => post.id === id);
 
-    const post = posts.find(post =>post.id === id);
-
-        if (!post) {
+    if (!post) {
         return res.status(404).json({
             error: "Post not found"
         });
     }
 
+    if (typeof req.body.title !== "string" || !req.body.title.trim()) {
+        return res.status(400).json({
+            error: "A valid title is required"
+        });
+    }
 
+    post.title = req.body.title.trim();
+
+    res.json(post);
 });
 
 app.post("/posts", (req, res) => {
@@ -72,6 +78,27 @@ app.post("/posts", (req, res) => {
 
     res.status(201).json(newPost);
 });
+
+
+
+app.delete("/posts/:id", (req, res) => {
+    const id = Number(req.params.id);
+    const index = posts.findIndex(post => post.id === id);
+
+    if (index === -1) {
+        return res.status(404).json({
+            error: "Post not found"
+        });
+    }
+
+    const deletedPost = posts.splice(index, 1)[0];
+
+    res.json({
+        message: "Post deleted successfully",
+        post: deletedPost
+    });
+});
+    
 
 app.listen(3000, () => {
     console.log("Express server running at http://localhost:3000");
