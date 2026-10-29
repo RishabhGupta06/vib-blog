@@ -17,6 +17,39 @@ app.get("/", (req, res) => {
 app.get("/posts", (req, res) => {
     res.json(posts);
 });
+app.get("/about", (req,res) => {
+    res.end("This is my blogging API");
+})
+
+
+app.get("/posts/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+        return res.status(404).json({
+            error: "Post not found"
+        });
+    }
+
+    res.json(post);
+});
+app.put("/posts/:id", (req, res) => {
+    // Your code here
+
+    const id = Number(req.params.id);
+
+    const post = posts.find(post =>post.id === id);
+
+        if (!post) {
+        return res.status(404).json({
+            error: "Post not found"
+        });
+    }
+
+
+});
 
 app.post("/posts", (req, res) => {
     const { title, author } = req.body;
