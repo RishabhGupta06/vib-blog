@@ -4,8 +4,16 @@ const mongoose = require("mongoose")
 
 
 const postSchema = new mongoose.Schema({
-    title: String,
-    author: String
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    author: {
+        type: String,
+        trim: true,
+        default: "Anonymous"
+    }
 });
 
 
