@@ -1,6 +1,4 @@
 const Post = require("../modules/post");
-const express = require("express");
-const router = express.Router();
 
 async function getPost(req,res){
         try {
