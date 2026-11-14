@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const post = require("./modules/post");
 const postRoutes = require("./routes/postRoutes");
-
+const userRoutes = require("./routes/userRoutes");
 
 require("dotenv").config();
 const app = express();
@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/posts", postRoutes);
+app.use("/users", userRoutes);
 // const posts = [
 //     { id: 1, title: "Learn JavaScript", author: "Asha" },
 //     { id: 2, title: "Learn Node.js", author: "Rahul" }

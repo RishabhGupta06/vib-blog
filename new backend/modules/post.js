@@ -13,6 +13,11 @@ const postSchema = new mongoose.Schema({
         type: String,
         trim: true,
         default: "Anonymous"
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 });
 
